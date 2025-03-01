@@ -1,0 +1,79 @@
+[
+  {
+    "current_run_id": "00000000-0000-0000-0000-000000000000",
+    "db_record_version": 0,
+    "namespace_id": "00000000-0000-0000-0000-000000000000",
+    "range_id": 0,
+    "run_id": "00000000-0000-0000-0000-000000000000",
+    "shard_id": 0,
+    "task_id": 0,
+    "type": null,
+    "visibility_ts": "0001-01-01T00:00:00Z",
+    "workflow_id": ""
+  },
+  {
+    "[applied]": false,
+    "current_run_id": "00000000-0000-0000-0000-000000000000",
+    "db_record_version": 4,
+    "namespace_id": "0e6dca44-271a-405e-9ab1-b757ed5ab31a",
+    "range_id": 0,
+    "run_id": "9dcc1140-afa5-4f41-9b6a-2030dec81551",
+    "shard_id": 2,
+    "task_id": -10,
+    "type": 1,
+    "visibility_ts": "2000-01-01T00:00:00Z",
+    "workflow_id": "foo"
+  },
+  {
+    "[applied]": false,
+    "current_run_id": "00000000-0000-0000-0000-000000000000",
+    "db_record_version": 4,
+    "namespace_id": "0e6dca44-271a-405e-9ab1-b757ed5ab31a",
+    "range_id": 0,
+    "run_id": "9dcc1140-afa5-4f41-9b6a-2030dec81551",
+    "shard_id": 2,
+    "task_id": -10,
+    "type": 1,
+    "visibility_ts": "2000-01-01T00:00:00Z",
+    "workflow_id": "foo"
+  },
+  {
+    "[applied]": false,
+    "current_run_id": "00000000-0000-0000-0000-000000000000",
+    "db_record_version": 0,
+    "namespace_id": "00000000-0000-0000-0000-000000000000",
+    "range_id": 0,
+    "run_id": "00000000-0000-0000-0000-000000000000",
+    "shard_id": 0,
+    "task_id": 0,
+    "type": null,
+    "visibility_ts": "0001-01-01T00:00:00Z",
+    "workflow_id": ""
+  },
+  {
+    "[applied]": false,
+    "current_run_id": "00000000-0000-0000-0000-000000000000",
+    "db_record_version": 0,
+    "namespace_id": "00000000-0000-0000-0000-000000000000",
+    "range_id": 0,
+    "run_id": "00000000-0000-0000-0000-000000000000",
+    "shard_id": 0,
+    "task_id": 0,
+    "type": null,
+    "visibility_ts": "0001-01-01T00:00:00Z",
+    "workflow_id": ""
+  },
+  {
+    "[applied]": false,
+    "current_run_id": "00000000-0000-0000-0000-000000000000",
+    "db_record_version": 0,
+    "namespace_id": "10000000-1000-f000-f000-000000000000",
+    "range_id": 6,
+    "run_id": "30000000-1000-f000-f000-000000000000",
+    "shard_id": 2,
+    "task_id": -11,
+    "type": 0,
+    "visibility_ts": "2000-01-01T00:00:00Z",
+    "workflow_id": "20000000-1000-f000-f000-000000000000"
+  }
+]
