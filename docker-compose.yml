@@ -1,12 +1,11 @@
 version: "3.5"
 
 services:
-
   scylla-node1:
+    profiles:
+      - scylla
     cap_add:
       - NET_ADMIN
-    profiles:
-      - scylladb
     container_name: scylla-node1
     image: scylladb/scylla:5.2.17
     restart: always
@@ -19,62 +18,39 @@ services:
     ports:
       - 9042:9042
 
-  # Join node manually
-  #  docker run -d \
-  #  --name scylla-node2 \
-  #  --restart always \
-  #  --network debug_web \
-  #  -p 9044:9042 \
-  #  -v "$(pwd)/scylla/scylla.yaml:/etc/scylla/scylla.yaml" \
-  #  -v "$(pwd)/scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties" \
-  #  scylladb/scylla:5.2.17 \
-  #  --seeds=scylla-node1 \
-  #  --smp 1 \
-  #  --memory 750M \
-  #  --overprovisioned 1 \
-  #  --api-address 0.0.0.0
-  # --cap-add=NET_ADMIN
+  scylla-node2:
+    profiles:
+      - scylla
+    cap_add:
+      - NET_ADMIN
+    container_name: scylla-node2
+    image: scylladb/scylla:5.2.17
+    restart: always
+    command: --seeds=scylla-node1 --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+    volumes:
+      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
+      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
+    networks:
+      web:
+    ports:
+      - 9043:9042
 
-  #  docker run -d \
-  #  --name scylla-node3 \
-  #  --restart always \
-  #  --network debug_web \
-  #  -p 9044:9042 \
-  #  -v "$(pwd)/scylla/scylla.yaml:/etc/scylla/scylla.yaml" \
-  #  -v "$(pwd)/scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties" \
-  #  scylladb/scylla:5.2.17 \
-  #  --seeds=scylla-node1 \
-  #  --smp 1 \
-  #  --memory 750M \
-  #  --overprovisioned 1 \
-  #  --api-address 0.0.0.0
-  # --cap-add=NET_ADMIN
-
-#  scylla-node2:
-#    container_name: scylla-node2
-#    image: scylladb/scylla:5.2.17
-#    restart: always
-#    command: --seeds=scylla-node1,scylla-node2 --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
-#    volumes:
-#      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
-#      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
-#    networks:
-#      web:
-#    ports:
-#      - 9043:9042
-
-#  scylla-node3:
-#    container_name: scylla-node3
-#    image: scylladb/scylla:5.2.17
-#    restart: always
-#    command: --seeds=scylla-node1,scylla-node2 --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
-#    volumes:
-#      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
-#      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
-#    ports:
-#      - 9044:9042
-#    networks:
-#      web:
+  scylla-node3:
+    profiles:
+      - scylla
+    cap_add:
+      - NET_ADMIN
+    container_name: scylla-node3
+    image: scylladb/scylla:5.2.17
+    restart: always
+    command: --seeds=scylla-node1 --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+    volumes:
+      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
+      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
+    ports:
+      - 9044:9042
+    networks:
+      web:
 
   temporal-ui:
     profiles:
@@ -88,6 +64,7 @@ services:
       - "8080:8080"
     networks:
       - temporal-dev-network
+
   elasticsearch:
     profiles:
       - temporal
@@ -119,7 +96,6 @@ networks:
   temporal-dev-network:
     driver: bridge
     name: temporal-dev-network
-
 #  docker run -d \
 #  --name scylla-node3 \
 #  --restart always \
@@ -133,3 +109,34 @@ networks:
 #  --memory 750M \
 #  --overprovisioned 1 \
 #  --api-address 0.0.0.0
+
+# Join node manually
+#  docker run -d \
+#  --name scylla-node2 \
+#  --restart always \
+#  --network debug_web \
+#  -p 9044:9042 \
+#  -v "$(pwd)/scylla/scylla.yaml:/etc/scylla/scylla.yaml" \
+#  -v "$(pwd)/scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties" \
+#  scylladb/scylla:5.2.17 \
+#  --seeds=scylla-node1 \
+#  --smp 1 \
+#  --memory 750M \
+#  --overprovisioned 1 \
+#  --api-address 0.0.0.0
+# --cap-add=NET_ADMIN
+
+#  docker run -d \
+#  --name scylla-node3 \
+#  --restart always \
+#  --network debug_web \
+#  -p 9044:9042 \
+#  -v "$(pwd)/scylla/scylla.yaml:/etc/scylla/scylla.yaml" \
+#  -v "$(pwd)/scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties" \
+#  scylladb/scylla:5.2.17 \
+#  --seeds=scylla-node1 \
+#  --smp 1 \
+#  --memory 750M \
+#  --overprovisioned 1 \
+#  --api-address 0.0.0.0
+# --cap-add=NET_ADMIN
