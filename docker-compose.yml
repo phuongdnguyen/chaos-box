@@ -47,10 +47,29 @@ services:
     volumes:
       - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
       - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
-    ports:
-      - 9044:9042
     networks:
       web:
+    ports:
+      - 9044:9042
+    
+  scylla-node4:
+    profiles:
+      - scylla
+    cap_add:
+      - NET_ADMIN
+    container_name: scylla-node4
+    image: scylladb/scylla:5.2.17
+    restart: always
+    command: --seeds=scylla-node1 --smp 1 --memory 750M --overprovisioned 1 --api-address 0.0.0.0
+    volumes:
+      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
+      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
+    networks:
+      web:
+    ports:
+      - 9045:9042
+    
+
 
   temporal-ui:
     profiles:
